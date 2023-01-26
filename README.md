@@ -22,3 +22,16 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+<template>
+ loginPage
+</template>
+
+<script>
+import {defineComponent} from "vue"
+export default defineComponent({})
+</script>
+
+<style>
+
+</style>
