@@ -11,10 +11,6 @@
           <video-camera-outlined />
           <span>nav 2</span>
         </MenuItem>
-        <MenuItem key="3">
-          <upload-outlined />
-          <span>nav 3</span>
-        </MenuItem>
       </Menu>
     </LayoutSider>
     <Layout style="height: 100vh">
@@ -73,6 +69,17 @@
             </div>
           </Card>
         </div>
+        <div>
+          <Table :columns="columns" :data-source="data" bordered>
+            <template #bodyCell="{ column, text }">
+              <template v-if="column.dataIndex === 'name'">
+                <a>{{ text }}</a>
+              </template>
+            </template>
+            <template #title>Header</template>
+            <template #footer>Footer</template>
+          </Table>
+        </div>
       </LayoutContent>
     </Layout>
   </Layout>
@@ -90,15 +97,52 @@ import {
   Row,
   Statistic,
   Card,
+  Table,
 } from "ant-design-vue";
 import {
   UserOutlined,
   VideoCameraOutlined,
-  UploadOutlined,
   MenuUnfoldOutlined,
   MenuFoldOutlined,
 } from "@ant-design/icons-vue";
 import { defineComponent, ref } from "vue";
+
+const columns = [
+  {
+    title: "Name",
+    dataIndex: "name",
+  },
+  {
+    title: "Cash Assets",
+    className: "column-money",
+    dataIndex: "money",
+  },
+  {
+    title: "Address",
+    dataIndex: "address",
+  },
+];
+const data = [
+  {
+    key: "1",
+    name: "John Brown",
+    money: "￥300,000.00",
+    address: "New York No. 1 Lake Park",
+  },
+  {
+    key: "2",
+    name: "Jim Green",
+    money: "￥1,256,000.00",
+    address: "London No. 1 Lake Park",
+  },
+  {
+    key: "3",
+    name: "Joe Black",
+    money: "￥120,000.00",
+    address: "Sidney No. 1 Lake Park",
+  },
+];
+
 export default defineComponent({
   components: {
     Layout,
@@ -112,9 +156,9 @@ export default defineComponent({
     Row,
     Statistic,
     Card,
+    Table,
     UserOutlined,
     VideoCameraOutlined,
-    UploadOutlined,
     MenuUnfoldOutlined,
     MenuFoldOutlined,
   },
@@ -128,12 +172,19 @@ export default defineComponent({
       selectedKeys: ref(["1"]),
       collapsed: ref(false),
       value,
+      data,
+      columns,
       onPanelChange,
     };
   },
 });
 </script>
 <style>
+th.column-money,
+td.column-money {
+  text-align: right !important;
+}
+
 #components-layout-demo-custom-trigger .trigger {
   font-size: 18px;
   line-height: 64px;
