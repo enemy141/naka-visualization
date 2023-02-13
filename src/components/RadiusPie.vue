@@ -1,15 +1,56 @@
-<template><highcharts :options="chartOptions"></highcharts></template>
+<template><highcharts v-if="reload" :options="chartOptions" :key="reload"></highcharts></template>
 
 <script>
 import { Chart } from "highcharts-vue";
 import { defineComponent } from "vue";
+import axios from "axios";
 
 export default defineComponent({
   components: {
     highcharts: Chart,
   },
+  async created() {
+    const data = await axios
+      .get(process.env.VUE_APP_API + "/api/data/all-game")
+      .then((res) => {
+        const gamedata = res.data.result;
+        const frequency = [];
+        gamedata.forEach(function (data) {
+          frequency[data] = frequency[data] ? frequency[data] + 1 : 1;
+        });
+        const frequencyArray = Object.entries(frequency);
+
+        const sortedFrequencyArray = frequencyArray.sort(function (a, b) {
+          return b[1] - a[1];
+        });
+        
+        const sortedFrequency = sortedFrequencyArray.reduce(function (
+          acc,
+          pair
+        ) {
+          acc[pair[0]] = pair[1];
+          return acc;
+        },
+        {});
+
+        const result = Object.entries(sortedFrequency).map(([name, count]) => ({
+          name,
+          y: count,
+        }));
+
+        return result;
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+      this.chartOptions.series[0].data = data
+      setTimeout(() =>{this.reload = true
+      },1000)
+  },
+
   data() {
     return {
+      reload: false,
       chartOptions: {
         chart: {
           plotBackgroundColor: null,
@@ -43,46 +84,7 @@ export default defineComponent({
           {
             name: "Brands",
             colorByPoint: true,
-            data: [
-              {
-                name: "Chrome",
-                y: 70.67,
-                sliced: true,
-                selected: true,
-              },
-              {
-                name: "Edge",
-                y: 14.77,
-              },
-              {
-                name: "Firefox",
-                y: 4.86,
-              },
-              {
-                name: "Safari",
-                y: 2.63,
-              },
-              {
-                name: "Internet Explorer",
-                y: 1.53,
-              },
-              {
-                name: "Opera",
-                y: 1.4,
-              },
-              {
-                name: "Sogou Explorer",
-                y: 0.84,
-              },
-              {
-                name: "QQ",
-                y: 0.51,
-              },
-              {
-                name: "Other",
-                y: 2.6,
-              },
-            ],
+            data: [],
           },
         ],
       },

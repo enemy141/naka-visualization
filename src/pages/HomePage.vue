@@ -1,15 +1,11 @@
 <template>
-  <Layout style="height: 200vh">
+  <Layout style="height: 170vh">
     <LayoutSider v-model:collapsed="collapsed" :trigger="null" collapsible>
       <div class="logo" style="height: 8vh" />
       <Menu v-model:selectedKeys="selectedKeys" theme="dark" mode="inline">
-        <MenuItem key="1">
-          <user-outlined />
-          <span>DashBoard</span>
-        </MenuItem>
-        <MenuItem key="2">
-          <video-camera-outlined />
-          <span>Chart</span>
+        <MenuItem key="1" @click="logout">
+          <poweroff-outlined />
+          <span>Log out</span>
         </MenuItem>
       </Menu>
     </LayoutSider>
@@ -35,17 +31,25 @@
         }"
       >
         <Divider orientation="left"></Divider>
-        <Row  justify="space-between">
-          <Col :span="6"><WordCloud /></Col>
-          <Col :span="6"><AccountConuntry /></Col>
-          <Col :span="6"><Row><GameTransaction /></row><Row><TotalAccount /></row></Col>
-        </Row>
-        <Row  justify="space-between">
-          <Col :span="6"><Row><F2PPlayed /></row><Row><PaidGames /></row></Col>
-          <Col :span="6"><AccountConuntry /></Col>
-          <Col :span="6"><RadiusPie /></Col>
-        </Row>
-        <Col :span="25"><ColumnChart /></Col>
+        <div style="display: flex">
+          <div style="flex: 1" class="column-custom"><WordCloud /></div>
+          <div style="flex: 1" class="column-custom"><AccountConuntry /></div>
+          <div style="flex: 1" class="column-custom">
+            <div><GameTransaction /></div>
+            <div><TotalAccount /></div>
+          </div>
+        </div>
+        <div style="display: flex">
+          <div style="flex: 1" class="column-custom">
+            <div><F2PPlayed /></div>
+            <div><PaidGames /></div>
+          </div>
+          <div style="flex: 1" class="column-custom"><AvgTimeToPlayGame /></div>
+          <div style="flex: 1" class="column-custom"><RadiusPie /></div>
+        </div>
+        <div style="display: flex">
+          <div style="flex: 1" class="column-custom"><ColumnChart /></div>
+        </div>
       </LayoutContent>
     </Layout>
   </Layout>
@@ -59,6 +63,7 @@ import TotalAccount from "@/components/TotalAccount.vue";
 import F2PPlayed from "@/components/F2PPlayed.vue";
 import PaidGames from "@/components/PaidGames.vue";
 import AccountConuntry from "@/components/AccountCountry.vue";
+import AvgTimeToPlayGame from "@/components/AvgTimeToPlayGame.vue";
 
 import {
   Layout,
@@ -68,16 +73,15 @@ import {
   Menu,
   MenuItem,
   Divider,
-  Row,
-  Col,
+  message,
 } from "ant-design-vue";
 import {
-  UserOutlined,
-  VideoCameraOutlined,
   MenuUnfoldOutlined,
   MenuFoldOutlined,
+  PoweroffOutlined,
 } from "@ant-design/icons-vue";
 import { defineComponent, ref } from "vue";
+import router from "@/router";
 
 export default defineComponent({
   components: {
@@ -87,13 +91,10 @@ export default defineComponent({
     LayoutContent,
     Menu,
     MenuItem,
-    UserOutlined,
-    VideoCameraOutlined,
     MenuUnfoldOutlined,
     MenuFoldOutlined,
+    PoweroffOutlined,
     Divider,
-    Col,
-    Row,
     AccountConuntry,
     GameTransaction,
     TotalAccount,
@@ -101,7 +102,15 @@ export default defineComponent({
     PaidGames,
     RadiusPie,
     WordCloud,
-    ColumnChart
+    ColumnChart,
+    AvgTimeToPlayGame,
+  },
+  methods: {
+    logout() {
+      localStorage.removeItem("token");
+      message.success("Logout successful");
+      router.push("/login");
+    },
   },
   setup() {
     const value = ref();
@@ -119,6 +128,10 @@ export default defineComponent({
 });
 </script>
 <style>
+.column-custom {
+  max-height: 350px;
+  overflow: auto;
+}
 th.column-account,
 td.column-account {
   text-align: right !important;

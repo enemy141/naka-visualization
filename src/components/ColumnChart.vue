@@ -1,83 +1,95 @@
-<template><highcharts :options="chartOptions"></highcharts></template>
+<template><highcharts v-if="reload" :options="chartOptions"></highcharts></template>
 
 <script>
 import { Chart } from "highcharts-vue";
 import { defineComponent } from "vue";
+import axios from "axios";
 
 export default defineComponent({
   components: {
     highcharts: Chart,
   },
+  async created() {
+    await axios
+      .get(process.env.VUE_APP_API + "/api/data/all-gameplay-date")
+      .then((res) => {
+        const dataArray = res.data.result;
+        const date = [];
+        const gameCount = [];
+        for (let i in dataArray) {
+          date.push(dataArray[i][0]);
+          gameCount.push(dataArray[i][1]);
+        }
+
+        const output = [];
+        const keys = new Set([]);
+
+        for (const obj of gameCount) {
+          for (const key in obj) {
+            keys.add(key);
+          }
+        }
+
+        for (const key of keys) {
+          const data = [];
+          for (const obj of gameCount) {
+            data.push(obj[key] || 0);
+          }
+          output.push({ name: key, data });
+        }
+
+        this.chartOptions.series = output;
+        this.chartOptions.xAxis.categories = date;
+        setTimeout(() =>{this.reload = true
+      },1000)
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  },
   data() {
     return {
+      reload: false,
       chartOptions: {
         chart: {
-        type: 'column'
-    },
-    title: {
-        text: 'Monthly Average Rainfall'
-    },
-    subtitle: {
-        text: 'Source: WorldClimate.com'
-    },
-    xAxis: {
-        categories: [
-            'Jan',
-            'Feb',
-            'Mar',
-            'Apr',
-            'May',
-            'Jun',
-            'Jul',
-            'Aug',
-            'Sep',
-            'Oct',
-            'Nov',
-            'Dec'
-        ],
-        crosshair: true
-    },
-    yAxis: {
-        min: 0,
+          type: "column",
+        },
         title: {
-            text: 'Rainfall (mm)'
-        }
-    },
-    tooltip: {
-        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-            '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
-        footerFormat: '</table>',
-        shared: true,
-        useHTML: true
-    },
-    plotOptions: {
-        column: {
-            pointPadding: 0.2,
-            borderWidth: 0
-        }
-    },
-    series: [{
-        name: 'Tokyo',
-        data: [49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4,
-            194.1, 95.6, 54.4]
-
-    }, {
-        name: 'New York',
-        data: [83.6, 78.8, 98.5, 93.4, 106.0, 84.5, 105.0, 104.3, 91.2, 83.5,
-            106.6, 92.3]
-
-    }, {
-        name: 'London',
-        data: [48.9, 38.8, 39.3, 41.4, 47.0, 48.3, 59.0, 59.6, 52.4, 65.2, 59.3,
-            51.2]
-
-    }, {
-        name: 'Berlin',
-        data: [42.4, 33.2, 34.5, 39.7, 52.6, 75.5, 57.4, 60.4, 47.6, 39.1, 46.8,
-            51.1]
-
-    }]
+          text: "Data History",
+        },
+        xAxis: {
+          categories: ["2021/22", "2020/21", "2019/20", "2018/19", "2017/18"],
+        },
+        yAxis: {
+          min: 0,
+          title: {
+            text: "Assists",
+          },
+        },
+        tooltip: {
+          pointFormat:
+            '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b> ({point.percentage:.0f}%)<br/>',
+          shared: true,
+        },
+        plotOptions: {
+          column: {
+            stacking: "percent",
+          },
+        },
+        series: [
+          {
+            name: "Kevin De Bruyne",
+            data: [4, 4, 2, 4, 4],
+          },
+          {
+            name: "Joshua Kimmich",
+            data: [0, 4, 3, 2, 3],
+          },
+          {
+            name: "Sadio Mané",
+            data: [1, 2, 2, 1, 2],
+          },
+        ],
       },
     };
   },
