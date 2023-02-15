@@ -1,5 +1,5 @@
 <template>
-  <Layout style="height: 170vh">
+  <Layout style="height: 220vh">
     <LayoutSider v-model:collapsed="collapsed" :trigger="null" collapsible>
       <div class="logo" style="height: 8vh" />
       <Menu v-model:selectedKeys="selectedKeys" theme="dark" mode="inline">
@@ -48,6 +48,9 @@
           <div style="flex: 1" class="column-custom"><RadiusPie /></div>
         </div>
         <div style="display: flex">
+          <div style="flex: 1" class="column-custom"><HistoryTransaction /></div>
+        </div>
+        <div style="display: flex">
           <div style="flex: 1" class="column-custom"><ColumnChart /></div>
         </div>
       </LayoutContent>
@@ -56,6 +59,7 @@
 </template>
 <script>
 import ColumnChart from "@/components/ColumnChart.vue";
+import HistoryTransaction from "@/components/HistoryTransaction.vue";
 import WordCloud from "@/components/WordCloud.vue";
 import RadiusPie from "@/components/RadiusPie.vue";
 import GameTransaction from "@/components/GameTransaction.vue";
@@ -104,6 +108,7 @@ export default defineComponent({
     WordCloud,
     ColumnChart,
     AvgTimeToPlayGame,
+    HistoryTransaction
   },
   methods: {
     logout() {
