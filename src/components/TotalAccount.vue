@@ -1,10 +1,10 @@
 <template>
-  <div v-if="reload" style="background: #ececec; padding: 30px">
+  <div v-if="reload" style="background: #ececec; padding: 15px">
     <Card>
       <Statistic
         title="TotalAccount"
         :value="card_TotalAccount"
-        style="margin-right: 100px"
+      
     /></Card>
   </div>
 </template>

@@ -1,5 +1,5 @@
 <template>
-  <div style="overflow : auto ; max-height: 350px;" >
+  <div style="max-height: 350px;" >
     <Table v-if="reload" :columns="table_columns" :data-source="countryData" bordered>
       <template #bodyCell="{ column, text }">
         <template v-if="column.dataIndex === 'name'">

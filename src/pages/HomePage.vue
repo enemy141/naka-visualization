@@ -38,7 +38,7 @@
         :style="{
           margin: '15px 10px',
           padding: '10px',
-          background: '#fff',
+          background: '#ececec',
           minHeight: '300px',
         }"
       >
@@ -49,17 +49,27 @@
             <div style="flex: 2" class="column-custom">
               <TransactionConuntry />
             </div>
-            <div style="flex: 1" class="column-custom">
-              <div><GameTransaction /></div>
-              <div><TotalAccount /></div>
+            <div
+              style="flex: 1; display: flex; align-items: center"
+              class="column-custom"
+            >
+              <div style="width: 100%">
+                <div style="margin: 5px"><GameTransaction /></div>
+                <div style="margin: 5px"><TotalAccount /></div>
+              </div>
             </div>
           </div>
         </div>
         <div class="box-custom">
           <div style="display: flex">
-            <div style="flex: 1" class="column-custom">
-              <div><F2PPlayed /></div>
-              <div><PaidGames /></div>
+            <div
+              style="flex: 1; display: flex; align-items: center"
+              class="column-custom"
+            >
+              <div style="width: 100%">
+                <div style="margin: 5px"><F2PPlayed /></div>
+                <div style="margin: 5px"><PaidGames /></div>
+              </div>
             </div>
             <div style="flex: 2" class="column-custom">
               <AvgTimeToPlayGame />
@@ -156,12 +166,6 @@ export default defineComponent({
 </script>
 <style>
 
-.box-custom {
-  border-style: solid;
-  border-radius: 5px;
-  border-width: 2px;
-  border-color: #d6dee1;
-}
 
 ::-webkit-scrollbar {
   width: 20px;
@@ -183,8 +187,16 @@ export default defineComponent({
 }
 
 .column-custom {
+  background-color: #fff;
+   border-style: solid;
+  border-radius: 5px;
+  border-width: 0.5px;
+  border-color: #d6dee1;
+  margin: 5px;
+  padding: 10px;
   max-height: 350px;
   overflow: auto;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 
 th.column-account,

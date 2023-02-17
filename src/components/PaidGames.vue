@@ -1,5 +1,5 @@
 <template>
-  <div v-if="reload" style="background: #ececec; padding: 30px">
+  <div v-if="reload" style="background: #ececec; padding: 15px">
     <Card>
       <Statistic
         title="PaidGame"

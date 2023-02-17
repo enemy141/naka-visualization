@@ -1,5 +1,5 @@
 <template>
-  <Layout style="height: 230vh">
+  <Layout style="height: 125vh">
     <LayoutSider v-model:collapsed="collapsed" :trigger="null" collapsible>
       <div class="logo" style="height: 8vh" />
       <Menu v-model:selectedKeys="selectedKeys" theme="dark" mode="inline">
@@ -36,16 +36,16 @@
       </LayoutHeader>
       <LayoutContent
         :style="{
-          margin: '30px 15px',
-          padding: '25px',
-          background: '#fff',
-          minHeight: '280px',
+          margin: '15px 10px',
+          padding: '10px',
+          background: '#ececec',
+          minHeight: '300px',
         }"
       >
         <Divider orientation="left"></Divider>
         <div class="box-custom">
-          <div style="display: flex">
-            <div style="flex: 1" class="column-custom">
+          <div style="flex: 1; display: flex; align-items: center">
+            <div style="flex: 1" class="container-custom">
               <HistoryTransaction />
             </div>
           </div>
@@ -124,4 +124,15 @@ export default defineComponent({
 });
 </script>
 <style>
+.container-custom {
+  background-color: #fff;
+   border-style: solid;
+  border-radius: 5px;
+  border-width: 0.5px;
+  border-color: #d6dee1;
+  margin: 5px;
+  padding: 10px;
+  overflow: auto;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
 </style>

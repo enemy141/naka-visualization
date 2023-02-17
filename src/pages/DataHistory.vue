@@ -1,5 +1,5 @@
 <template>
-  <Layout style="height: 200vh">
+  <Layout style="height: 100vh">
     <LayoutSider v-model:collapsed="collapsed" :trigger="null" collapsible>
       <div class="logo" style="height: 8vh" />
       <Menu v-model:selectedKeys="selectedKeys" theme="dark" mode="inline">
@@ -37,15 +37,15 @@
       <LayoutContent
         :style="{
           margin: '30px 15px',
-          padding: '25px',
-          background: '#fff',
-          minHeight: '100px',
+          padding: '30px',
+          background: '#ececec',
+          minHeight: '300px',
         }"
       >
         <Divider orientation="left"></Divider>
         <div class="box-custom">
-          <div style="display: flex">
-            <div style="flex: 1" class="column-custom"><ColumnChart /></div>
+          <div style="flex: 1; display: flex; align-items: center">
+            <div style="flex: 1" class="container-custom"><ColumnChart /></div>
           </div>
         </div>
       </LayoutContent>

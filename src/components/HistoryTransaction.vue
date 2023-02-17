@@ -1,5 +1,5 @@
 <template>
-  <div style="overflow: auto; max-height: 350px">
+  <div style="max-height: 700px">
     <Table
       v-if="reload"
       :columns="table_columns"
@@ -11,7 +11,7 @@
           <a>{{ text }}</a>
         </template>
       </template>
-      <template #title>Transaction History</template>
+      <template #title >Transaction History</template>
       <template #footer></template>
     </Table>
   </div>
