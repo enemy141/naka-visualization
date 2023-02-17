@@ -1,9 +1,21 @@
 <template>
-  <Layout style="height: 220vh">
+  <Layout style="height: 125vh">
     <LayoutSider v-model:collapsed="collapsed" :trigger="null" collapsible>
       <div class="logo" style="height: 8vh" />
       <Menu v-model:selectedKeys="selectedKeys" theme="dark" mode="inline">
-        <MenuItem key="1" @click="logout">
+        <MenuItem key="1">
+          <InsertRowAboveOutlined />
+          <span>Dashboad</span>
+        </MenuItem>
+        <MenuItem key="2" @click="tranHis">
+          <InsertRowRightOutlined />
+          <span>Trasaction History</span>
+        </MenuItem>
+        <MenuItem key="3" @click="dataHis">
+          <BarChartOutlined />
+          <span>Data History</span>
+        </MenuItem>
+        <MenuItem key="4" @click="logout">
           <poweroff-outlined />
           <span>Log out</span>
         </MenuItem>
@@ -24,49 +36,49 @@
       </LayoutHeader>
       <LayoutContent
         :style="{
-          margin: '24px 16px',
-          padding: '24px',
+          margin: '15px 10px',
+          padding: '10px',
           background: '#fff',
-          minHeight: '280px',
+          minHeight: '300px',
         }"
       >
         <Divider orientation="left"></Divider>
-        <div style="display: flex">
-          <div style="flex: 1" class="column-custom"><WordCloud /></div>
-          <div style="flex: 1" class="column-custom"><AccountConuntry /></div>
-          <div style="flex: 1" class="column-custom">
-            <div><GameTransaction /></div>
-            <div><TotalAccount /></div>
+        <div class="box-custom">
+          <div style="display: flex">
+            <div style="flex: 2" class="column-custom"><WordCloud /></div>
+            <div style="flex: 2" class="column-custom">
+              <TransactionConuntry />
+            </div>
+            <div style="flex: 1" class="column-custom">
+              <div><GameTransaction /></div>
+              <div><TotalAccount /></div>
+            </div>
           </div>
         </div>
-        <div style="display: flex">
-          <div style="flex: 1" class="column-custom">
-            <div><F2PPlayed /></div>
-            <div><PaidGames /></div>
+        <div class="box-custom">
+          <div style="display: flex">
+            <div style="flex: 1" class="column-custom">
+              <div><F2PPlayed /></div>
+              <div><PaidGames /></div>
+            </div>
+            <div style="flex: 2" class="column-custom">
+              <AvgTimeToPlayGame />
+            </div>
+            <div style="flex: 2" class="column-custom"><RadiusPie /></div>
           </div>
-          <div style="flex: 1" class="column-custom"><AvgTimeToPlayGame /></div>
-          <div style="flex: 1" class="column-custom"><RadiusPie /></div>
-        </div>
-        <div style="display: flex">
-          <div style="flex: 1" class="column-custom"><HistoryTransaction /></div>
-        </div>
-        <div style="display: flex">
-          <div style="flex: 1" class="column-custom"><ColumnChart /></div>
         </div>
       </LayoutContent>
     </Layout>
   </Layout>
 </template>
 <script>
-import ColumnChart from "@/components/ColumnChart.vue";
-import HistoryTransaction from "@/components/HistoryTransaction.vue";
 import WordCloud from "@/components/WordCloud.vue";
 import RadiusPie from "@/components/RadiusPie.vue";
 import GameTransaction from "@/components/GameTransaction.vue";
 import TotalAccount from "@/components/TotalAccount.vue";
 import F2PPlayed from "@/components/F2PPlayed.vue";
 import PaidGames from "@/components/PaidGames.vue";
-import AccountConuntry from "@/components/AccountCountry.vue";
+import TransactionConuntry from "@/components/TransactionCountry.vue";
 import AvgTimeToPlayGame from "@/components/AvgTimeToPlayGame.vue";
 
 import {
@@ -83,6 +95,9 @@ import {
   MenuUnfoldOutlined,
   MenuFoldOutlined,
   PoweroffOutlined,
+  BarChartOutlined,
+  InsertRowAboveOutlined,
+  InsertRowRightOutlined,
 } from "@ant-design/icons-vue";
 import { defineComponent, ref } from "vue";
 import router from "@/router";
@@ -98,23 +113,30 @@ export default defineComponent({
     MenuUnfoldOutlined,
     MenuFoldOutlined,
     PoweroffOutlined,
+    BarChartOutlined,
+    InsertRowAboveOutlined,
+    InsertRowRightOutlined,
     Divider,
-    AccountConuntry,
+    TransactionConuntry,
     GameTransaction,
     TotalAccount,
     F2PPlayed,
     PaidGames,
     RadiusPie,
     WordCloud,
-    ColumnChart,
     AvgTimeToPlayGame,
-    HistoryTransaction
   },
   methods: {
     logout() {
       localStorage.removeItem("token");
       message.success("Logout successful");
       router.push("/login");
+    },
+    dataHis() {
+      router.push("/data");
+    },
+    tranHis() {
+      router.push("/transaction");
     },
   },
   setup() {
@@ -133,10 +155,38 @@ export default defineComponent({
 });
 </script>
 <style>
+
+.box-custom {
+  border-style: solid;
+  border-radius: 5px;
+  border-width: 2px;
+  border-color: #d6dee1;
+}
+
+::-webkit-scrollbar {
+  width: 20px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #d6dee1;
+  border-radius: 20px;
+  border: 6px solid transparent;
+  background-clip: content-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #a8bbbf;
+}
+
 .column-custom {
   max-height: 350px;
   overflow: auto;
 }
+
 th.column-account,
 td.column-account {
   text-align: right !important;

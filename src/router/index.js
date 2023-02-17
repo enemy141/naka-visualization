@@ -1,7 +1,9 @@
 import  {createRouter,createWebHistory}from 'vue-router'
 import LoginPage from '@/pages/LoginPage'
 import HomePage from '@/pages/HomePage'
+import Transaction from '@/pages/TransactionHistory'
 import PageNotFound from '@/pages/PageNotFound'
+import DataHistory from '@/pages/DataHistory'
 import axios from 'axios'
 
 import {message} from 'ant-design-vue'
@@ -9,6 +11,8 @@ import {message} from 'ant-design-vue'
 const routes = [
     { path: '/login',name : 'login', component: LoginPage },
     { path: '/home',name : 'home', component: HomePage},
+    { path: '/transaction',name : 'transaction-history', component: Transaction},
+    { path: '/data',name : 'data-history', component: DataHistory},
     { path: "/:catchAll(.*)", component: PageNotFound}
   ]
 

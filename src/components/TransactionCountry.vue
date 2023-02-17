@@ -6,7 +6,7 @@
           <a>{{ text }}</a>
         </template>
       </template>
-      <template #title>Count by country account</template>
+      <template #title>Transaction per country</template>
       <template #footer></template>
     </Table>
   </div>
@@ -23,9 +23,9 @@ const table_columns = [
     dataIndex: "country",
   },
   {
-    title: "account",
+    title: "transaction",
     className: "column-account",
-    dataIndex: "account",
+    dataIndex: "transaction",
   },
 ];
 
@@ -64,7 +64,7 @@ export default defineComponent({
           ([country, count], index) => ({
             key: index + 1,
             country,
-            account: count,
+            transaction: count,
           })
         );
 
