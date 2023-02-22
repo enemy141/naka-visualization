@@ -55,7 +55,7 @@ export default defineComponent({
           type: "column",
         },
         title: {
-          text: "Data History",
+          text: "Transaction per Game",
         },
         xAxis: {
           categories: ["2021/22", "2020/21", "2019/20", "2018/19", "2017/18"],

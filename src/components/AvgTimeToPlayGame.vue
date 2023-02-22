@@ -6,7 +6,7 @@
           <a>{{ text }}</a>
         </template>
       </template>
-      <template #title>average time to play</template>
+      <template #title>Average time per game</template>
       <template #footer></template>
     </Table>
   </div>

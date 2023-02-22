@@ -16,11 +16,11 @@
         </MenuItem>
         <MenuItem key="2" @click="goTo('/home/transaction')">
           <InsertRowRightOutlined />
-          <span>Trasaction History</span>
+          <span>Trasaction</span>
         </MenuItem>
         <MenuItem key="3" @click="goTo('/home/data')">
           <BarChartOutlined />
-          <span>Data History</span>
+          <span>Game transaction</span>
         </MenuItem>
         <MenuItem key="4" style="margin-top: 90vh;" @click="logout">
           <poweroff-outlined />

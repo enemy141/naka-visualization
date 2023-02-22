@@ -6,7 +6,7 @@
     :words="countryData"
     :color="
       ([, weight]) =>
-        weight > 3 ? 'DeepPink' : weight > 2 ? 'RoyalBlue': weight > 2 ? 'Green' : 'Indigo'
+        weight > 3 ? 'DeepPink' : weight > 2 ? 'RoyalBlue': weight > 1 ? 'Green' : 'Indigo'
     "
     :spacing="1"
   />
