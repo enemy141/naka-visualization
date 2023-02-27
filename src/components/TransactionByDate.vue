@@ -4,13 +4,13 @@
     <Space direction="horizontal">
       <Card class="style-card">
         <Statistic
-          title="tranToday"
+          title="current day transaction"
           :value="tranCountToday"
           style="margin-right: 100px"
       /></Card>
       <Card class="style-card">
         <Statistic
-          title="tranYesterday"
+          title="previous day transaction"
           :value="tranCountYesterday"
           style="margin-right: 100px"
       /></Card>
