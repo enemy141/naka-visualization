@@ -13,8 +13,8 @@
     "core-js": "^3.8.3",
     "highcharts": "^10.3.3",
     "highcharts-vue": "^1.4.0",
+    "moment": "^2.29.4",
     "vue": "^3.2.13",
-    "vue-d3-charts": "^0.2.8",
     "vue-router": "^4.1.6",
     "vuewordcloud": "^19.0.0"
   },

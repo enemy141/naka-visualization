@@ -1,4 +1,5 @@
 <template>
+  <Skeleton active  v-if="reload != true"/>
   <div style="max-height: 350px;" >
     <Table v-if="reload" :columns="table_columns" :data-source="countryData" bordered>
       <template #bodyCell="{ column, text }">
@@ -15,6 +16,7 @@
 <script>
 import { Table } from "ant-design-vue";
 import axios from "axios";
+import {Skeleton} from "ant-design-vue";
 import { defineComponent } from "vue";
 
 const table_columns = [
@@ -31,7 +33,7 @@ const table_columns = [
 
 export default defineComponent({
   name: "GameTransaction",
-  components: { Table },
+  components: { Table,Skeleton },
   data() {
     return {reload:false, countryData: [] };
   },

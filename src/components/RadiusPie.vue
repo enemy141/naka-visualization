@@ -1,13 +1,18 @@
-<template><highcharts v-if="reload" :options="chartOptions" :key="reload"></highcharts></template>
+<template>
+  <Skeleton active  v-if="reload != true"/>
+  <highcharts v-if="reload" :options="chartOptions" :key="reload"></highcharts>
+</template>
 
 <script>
 import { Chart } from "highcharts-vue";
 import { defineComponent } from "vue";
+import {Skeleton} from "ant-design-vue";
 import axios from "axios";
 
 export default defineComponent({
   components: {
     highcharts: Chart,
+    Skeleton
   },
   async created() {
     const data = await axios
@@ -23,7 +28,7 @@ export default defineComponent({
         const sortedFrequencyArray = frequencyArray.sort(function (a, b) {
           return b[1] - a[1];
         });
-        
+
         const sortedFrequency = sortedFrequencyArray.reduce(function (
           acc,
           pair
@@ -43,9 +48,10 @@ export default defineComponent({
       .catch((error) => {
         console.log(error);
       });
-      this.chartOptions.series[0].data = data
-      setTimeout(() =>{this.reload = true
-      },1000)
+    this.chartOptions.series[0].data = data;
+    setTimeout(() => {
+      this.reload = true;
+    }, 1000);
   },
 
   data() {
@@ -59,7 +65,7 @@ export default defineComponent({
           type: "pie",
         },
         title: {
-          text: "Browser market shares in May, 2020",
+          text: "Gameplayed",
           align: "left",
         },
         tooltip: {

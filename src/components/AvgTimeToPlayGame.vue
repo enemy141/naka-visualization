@@ -1,5 +1,6 @@
 <template>
   <div>
+    <Skeleton active  v-if="reload != true"/>
     <Table v-if="reload" :columns="table_columns" :data-source="avgGameTime" bordered>
       <template #bodyCell="{ column, text }">
         <template v-if="column.dataIndex === 'name'">
@@ -13,7 +14,7 @@
 </template>
 
 <script>
-import { Table } from "ant-design-vue";
+import { Table ,Skeleton} from "ant-design-vue";
 import axios from "axios";
 import { defineComponent } from "vue";
 
@@ -31,7 +32,7 @@ const table_columns = [
 
 export default defineComponent({
   name: "GameTransaction",
-  components: { Table },
+  components: { Table,Skeleton },
   data() {
     return {reload: false, avgGameTime: [] };
   },

@@ -12,7 +12,7 @@
               class="column-custom"
             >
               <div style="width: 100%">
-                <div style="margin: 5px"><GameTransaction /></div>
+                <div style="margin: 5px"><GameTransactionCount /></div>
                 <div style="margin: 5px"><TotalAccount /></div>
               </div>
             </div>
@@ -40,7 +40,7 @@
 <script>
 import WordCloud from "@/components/WordCloud.vue";
 import RadiusPie from "@/components/RadiusPie.vue";
-import GameTransaction from "@/components/GameTransaction.vue";
+import GameTransactionCount from "@/components/GameTransactionCount.vue";
 import TotalAccount from "@/components/TotalAccount.vue";
 import F2PPlayed from "@/components/F2PPlayed.vue";
 import PaidGames from "@/components/PaidGames.vue";
@@ -51,7 +51,7 @@ import { defineComponent} from "vue";
 export default defineComponent({
   components: {
     TransactionConuntry,
-    GameTransaction,
+    GameTransactionCount,
     TotalAccount,
     F2PPlayed,
     PaidGames,

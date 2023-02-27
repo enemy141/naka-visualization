@@ -12,7 +12,7 @@
       <Menu v-model:selectedKeys="selectedKeys" theme="dark" mode="inline">
         <MenuItem key="1" @click="goTo('/home')">
           <InsertRowAboveOutlined />
-          <span>Dash Boad</span>
+          <span>DashBoad</span>
         </MenuItem>
         <MenuItem key="2" @click="goTo('/home/transaction')">
           <InsertRowRightOutlined />

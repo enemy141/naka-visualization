@@ -1,4 +1,5 @@
 <template>
+  <Skeleton active  v-if="reload != true"/>
   <vue-word-cloud
     v-if="reload"
     style="height: 400px; width: 400px"
@@ -14,11 +15,13 @@
 
 <script>
 import VueWordCloud from "vuewordcloud";
+import {Skeleton} from "ant-design-vue";
 import axios from "axios";
 
 export default {
   components: {
     VueWordCloud,
+    Skeleton
   },
   data() {
     return {
@@ -29,25 +32,24 @@ export default {
   },
   async created() {
     const cd = await axios
-      .get(process.env.VUE_APP_API + "/api/data/all-nation")
+      .get(process.env.VUE_APP_API + "/api/data/all-username")
       .then((res) => {
-        const countries = res.data.result;
-
+        const username = res.data.result;
         const frequency = {};
 
-        countries.forEach(function (country) {
-          frequency[country] = frequency[country] ? frequency[country] + 1 : 1;
+        username.forEach(function (username) {
+          frequency[username] = frequency[username] ? frequency[username] + 1 : 1;
         });
 
         const frequencyArray = Object.entries(frequency).map(
-          ([country, count]) => [country, count]
+          ([username, count]) => [username, count]
         );
 
         const sortedFrequencyArray = frequencyArray.sort((a, b) => b[1] - a[1]);
 
         const topFive = sortedFrequencyArray.slice(0, 5);
-        const randomTopFive = topFive.map(([country]) => [
-          country,
+        const randomTopFive = topFive.map(([username]) => [
+        username,
           Math.floor(Math.random() * 4) + 1,
         ]);
         return randomTopFive;

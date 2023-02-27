@@ -4,14 +4,14 @@
     <div class="box-custom">
       <div style="flex: 1; display: flex; align-items: center">
         <div style="flex: 1" class="container-custom">
-          <HistoryTransaction />
+          <GameTransaction />
         </div>
       </div>
     </div>
   </div>
 </template>
 <script>
-import HistoryTransaction from "@/components/HistoryTransaction.vue";
+import GameTransaction from "@/components/GameTransaction.vue";
 
 import { Divider } from "ant-design-vue";
 import { defineComponent} from "vue";
@@ -19,7 +19,7 @@ import { defineComponent} from "vue";
 export default defineComponent({
   components: {
     Divider,
-    HistoryTransaction,
+    GameTransaction,
   }
 });
 </script>

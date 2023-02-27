@@ -1,9 +1,9 @@
 import { createRouter, createWebHistory } from "vue-router";
 import LoginPage from "@/pages/LoginPage";
-import HomePage from "@/pages/HomePage"
-import Transaction from "@/pages/TransactionHistory";
+import DashBoard from "@/pages/DashBoard"
+import GameTransactionHistory from "@/pages/GameTransactionHistory";
 import PageNotFound from "@/pages/PageNotFound";
-import DataHistory from "@/pages/DataHistory";
+import TransactionPerGame from "@/pages/TransactionPerGame";
 import MainPage from "@/pages/MainPage";
 import axios from "axios";
 
@@ -14,15 +14,15 @@ const routes = [
   { path: "/home", name: "home", component: MainPage, children: [
     {
       path:"",
-      component:HomePage
+      component:DashBoard
     },
     {
       path:"transaction",
-      component: Transaction 
+      component: GameTransactionHistory 
     },
     {
       path:"data",
-      component:DataHistory
+      component:TransactionPerGame
     }
   ] },
   { path: "/:catchAll(.*)", component: PageNotFound },

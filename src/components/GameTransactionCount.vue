@@ -2,10 +2,10 @@
   <Skeleton active  v-if="reload != true"/>
   <div
     v-if="reload"
-    style="background: #aafc5d; padding: 15px; border-radius: 5px"
+    style="background: #e28743; padding: 15px; border-radius: 5px"
   >
     <Card class="style-card">
-      <Statistic title="PaidGame" :value="paidGame" style="margin-right: 100px"
+      <Statistic title="GameTransaction" :value="card_TotalTransaction"
     /></Card>
   </div>
 </template>
@@ -23,21 +23,19 @@ export default defineComponent({
     Skeleton
   },
   data() {
-    return { reload: false, paidGame: Number };
+    return { reload: false, card_TotalTransaction: Number };
   },
   async created() {
-    const data = await axios
-      .get(process.env.VUE_APP_API + "/api/data/all-play-to-earn")
+    const ad = await axios
+      .get(process.env.VUE_APP_API + "/api/data/transaction-count")
       .then((res) => {
         const result = res.data.result;
-        const p_data = result.filter((value) => value);
-
-        return p_data.length;
+        return result;
       })
       .catch((error) => {
         console.log(error);
       });
-    this.paidGame = data;
+    this.card_TotalTransaction = ad;
     setTimeout(() => {
       this.reload = true;
     }, 1000);
@@ -48,4 +46,8 @@ export default defineComponent({
 });
 </script>
 
-<style></style>
+<style>
+.style-card {
+  border-radius: 5px;
+}
+</style>

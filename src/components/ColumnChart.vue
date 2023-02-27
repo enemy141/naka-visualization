@@ -1,6 +1,10 @@
-<template><highcharts v-if="reload" :options="chartOptions"></highcharts></template>
+<template>
+  <Skeleton active  v-if="reload != true"/>
+  <highcharts v-if="reload" :options="chartOptions"></highcharts>
+</template>
 
 <script>
+import {Skeleton} from "ant-design-vue";
 import { Chart } from "highcharts-vue";
 import { defineComponent } from "vue";
 import axios from "axios";
@@ -8,6 +12,7 @@ import axios from "axios";
 export default defineComponent({
   components: {
     highcharts: Chart,
+    Skeleton
   },
   async created() {
     await axios
@@ -40,8 +45,9 @@ export default defineComponent({
 
         this.chartOptions.series = output;
         this.chartOptions.xAxis.categories = date;
-        setTimeout(() =>{this.reload = true
-      },1000)
+        setTimeout(() => {
+          this.reload = true;
+        }, 1000);
       })
       .catch((error) => {
         console.log(error);
@@ -76,20 +82,7 @@ export default defineComponent({
             stacking: "percent",
           },
         },
-        series: [
-          {
-            name: "Kevin De Bruyne",
-            data: [4, 4, 2, 4, 4],
-          },
-          {
-            name: "Joshua Kimmich",
-            data: [0, 4, 3, 2, 3],
-          },
-          {
-            name: "Sadio Mané",
-            data: [1, 2, 2, 1, 2],
-          },
-        ],
+        series: [],
       },
     };
   },
